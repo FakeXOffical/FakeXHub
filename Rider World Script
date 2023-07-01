@@ -2,7 +2,7 @@ local Discord_Gui = loadstring(game:HttpGet"https://raw.githubusercontent.com/da
 
 local Window = Discord_Gui:Window("Fake X Hub")
 
-local Server = Window:Server("Rider World V 1.0.8", "")
+local Server = Window:Server("Rider World V 1.0.9", "")
 
 local Tab_1 = Server:Channel("- Auto Fram")
 
@@ -269,17 +269,17 @@ Tab_1:Toggle("Auto Fram Select", false, function(Function)
 								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
 								
 								
-								if _G.E == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.E == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 								end
-								if _G.R == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.R == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 								end
-								if _G.C == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.C == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 								end
-								if _G.V == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.V == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 								end
 							until _G.Auto_Fram_Select ~= true or v.Humanoid.Health == 0 or _G.Is_Near == true
 						elseif v.Name == _G.Monster_Select and v.Humanoid.Health <= 0 and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true then
@@ -460,17 +460,17 @@ Tab_1:Toggle("Auto Fram Level", false, function(Function)
 									game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
 									
 									
-									if _G.E == true then
-										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									if _G.E == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E") then
+										game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 									end
-									if _G.R == true then
-										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									if _G.R == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+										game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 									end
-									if _G.C == true then
-										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									if _G.C == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+										game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 									end
-									if _G.V == true then
-										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									if _G.V == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+										game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 									end
 								until _G.Auto_Fram ~= true or v.Humanoid.Health == 0 or v.Name ~= Monster
 							elseif v.Name == Monster and v.Humanoid.Health <= 0 then
@@ -522,17 +522,17 @@ Tab_1:Toggle("Kill Aura", false, function(Function)
 								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
 								
 								
-								if _G.E == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.E == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 								end
-								if _G.R == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.R == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 								end
-								if _G.C == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.C == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 								end
-								if _G.V == true then
-									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								if _G.V == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+									game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 								end
 							until _G.Kill_Aura ~= true or v.Humanoid.Health == 0
 						end
@@ -644,16 +644,16 @@ Tab_2:Toggle("Auto Dungeon Phase 1", false, function(Function)
 										game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
 									end
 									
-									if _G.E_D == true then
+									if _G.E_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E")  then
 										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
 									end
-									if _G.R_D == true then
+									if _G.R_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
 										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
 									end
-									if _G.C_D == true then
+									if _G.C_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
 										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
 									end
-									if _G.V_D == true then
+									if _G.V_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
 										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
 									end
 								until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
@@ -691,17 +691,17 @@ Tab_2:Toggle("Auto Dungeon Phase 1", false, function(Function)
 											game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
 										end
 										
-										if _G.E_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.E_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E")  then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 										end
-										if _G.R_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.R_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 										end
-										if _G.C_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.C_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 										end
-										if _G.V_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.V_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 										end
 									until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
 								end
@@ -724,17 +724,18 @@ Tab_2:Toggle("Auto Dungeon Phase 1", false, function(Function)
 											game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
 										end
 										
-										if _G.E_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										
+										if _G.E_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E")  then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 										end
-										if _G.R_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.R_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 										end
-										if _G.C_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.C_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 										end
-										if _G.V_D == true then
-											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										if _G.V_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+											game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 										end
 									until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
 								end
@@ -766,19 +767,18 @@ Tab_2:Toggle("Auto Dungeon Phase 2 [Attack Aura / No Boss]", false, function(Fun
 						else
 							game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
 						end
-						
-						
-						if _G.E_D == true then
-							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										
+						if _G.E_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("E")  then
+							game:GetService("VirtualInputManager"):SendKeyEvent(true, "E", false, game)
 						end
-						if _G.R_D == true then
-							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						if _G.R_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("R") then
+							game:GetService("VirtualInputManager"):SendKeyEvent(true, "R", false, game)
 						end
-						if _G.C_D == true then
-							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						if _G.C_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("C") then
+							game:GetService("VirtualInputManager"):SendKeyEvent(true, "C", false, game)
 						end
-						if _G.V_D == true then
-							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						if _G.V_D == true and not game:GetService("Players").LocalPlayer:FindFirstChild("V") then
+							game:GetService("VirtualInputManager"):SendKeyEvent(true, "V", false, game)
 						end
 						
 										

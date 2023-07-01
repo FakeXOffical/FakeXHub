@@ -1,0 +1,950 @@
+local Discord_Gui = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local Window = Discord_Gui:Window("Fake X Hub")
+
+local Server = Window:Server("Rider World V 1.0.8", "")
+
+local Tab_1 = Server:Channel("- Auto Fram")
+
+local Tab_2 = Server:Channel("- Auto Dungeon")
+
+local Tab_3 = Server:Channel("- Players")
+
+local Tab_4 = Server:Channel("- Teleport")
+local Tab_5 = Server:Channel("- Misc")
+
+
+NPC_Teleport_Tab = {}
+Player_In_The_Game = {}
+
+
+for _, v in pairs(game:GetService("Workspace").NPC:GetChildren()) do
+	table.insert(NPC_Teleport_Tab, v.Name)
+end
+
+
+for _, v in pairs(game:GetService("Players"):GetChildren()) do
+	table.insert(Player_In_The_Game, v.Name)
+end
+
+
+_G.Is_Near = false
+
+
+game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.LevelDescription.Changed:Connect(function()
+	for i = (_G.Level - 1), 80 do wait()
+		local Level_Text = game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.LevelDescription.Text
+		if string.match(Level_Text, "Current Level : "..i) ~= nil and _G.Auto_Fram == true then
+			_G.Level = tonumber(i)
+		end
+	end
+end)
+
+
+game:GetService("Players").PlayerAdded:Connect(function(Plr)
+	if _G.Player_Old ~= #game:GetService("Players"):GetChildren() then
+		Dropdown_4:Add(Plr.Name)
+	end
+end)
+
+
+function Check_Levels()
+	local Level_Text = game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.LevelDescription.Text
+	local Rider_Check = game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled
+	
+	if Rider_Check then
+		if _G.Level == 1 or _G.Level <= 4 then
+			Monster = "Lost Rider Lv.1"
+			Place = CFrame.new(29.3128662, 4.24629545, -224.774353, -0.983508468, -1.43121897e-08, 0.180862159, 1.93377914e-09, 1, 8.96488146e-08, -0.180862159, 8.85201104e-08, -0.983508468)
+		elseif _G.Level == 5 or _G.Level <= 6 then
+			Monster = "Armed Lost Rider Lv.5"
+			Place = CFrame.new(45.9066887, 4.08676243, 212.233276, -0.99994272, 1.08837224e-08, -0.01070322, 9.84003723e-09, 1, 9.75640191e-08, 0.01070322, 9.74531105e-08, -0.99994272)
+		elseif _G.Level == 7 or _G.Level <= 9 then
+			Monster = "Dragon User Lv.7"
+			Place = CFrame.new(5.57322025, 3.5454154, 2.90422869, -0.999992311, -6.82722989e-09, 0.00392367505, -6.8444761e-09, 1, -4.3820485e-09, -0.00392367505, -4.40887016e-09, -0.999992311)
+		elseif _G.Level == 10 or _G.Level <= 12 then
+			Monster = "Crab User Lv.10"
+			Place = CFrame.new(-118.56749, 21.5061188, 586.25885, -0.831817746, 1.84996363e-09, 0.555048883, 1.631979e-08, 1, 2.11244959e-08, -0.555048883, 2.66300102e-08, -0.831817746)
+		elseif _G.Level == 13 or _G.Level <= 15 then
+			Monster = "Bat User Lv.12"
+			Place = CFrame.new(-161.89624, 74.4638138, 315.402374, 0.00328491186, -5.33524762e-08, 0.999994576, -8.33198541e-08, 1, 5.36264615e-08, -0.999994576, -8.34955642e-08, 0.00328491186)
+		elseif _G.Level == 14 or _G.Level <= 19 then
+			Monster = "Bull User Lv.15"
+			Place = CFrame.new(-405.500122, 8.92230606, 1629.97803, -0.999565899, -5.17028056e-08, 0.0294624269, -4.97565793e-08, 1, 6.67910101e-08, -0.0294624269, 6.52960637e-08, -0.999565899)
+		elseif _G.Level == 20 or _G.Level <= 24 then
+			Monster = "Cobra User Lv.20"
+			Place = CFrame.new(-461.304474, 8.89017105, 1912.84827, -0.999530077, -4.98586505e-09, -0.0306540187, -5.01859931e-09, 1, 9.90926341e-10, 0.0306540187, 1.14430099e-09, -0.999530077)
+		elseif _G.Level == 25 or _G.Level <= 29 then
+			Monster = "Manta User Lv.25"
+			Place = CFrame.new(402.268951, 3.97849035, 2065.15479, -0.153874293, -9.24403665e-09, -0.988090456, 5.59059998e-08, 1, -1.80616393e-08, 0.988090456, -5.80194062e-08, -0.153874293)
+		elseif _G.Level == 30 or _G.Level <= 34 then
+			Monster = "Swan User Lv. 30"
+			Place = CFrame.new(442.219666, 3.97773886, 1830.87341, 0.287705749, -9.02880704e-09, 0.957718849, 4.74067683e-08, 1, -4.81393103e-09, -0.957718849, 4.67873491e-08, 0.287705749)
+		elseif _G.Level == 35 or _G.Level <= 39 then
+			Monster = "Chameleon User Lv.35"
+			Place = CFrame.new(610.614502, 129.234726, 1741.3551, 0.961737275, 5.61098323e-09, -0.273973316, -1.42920822e-08, 1, -2.96899199e-08, 0.273973316, 3.24695506e-08, 0.961737275)
+		elseif _G.Level == 40 or _G.Level <= 44 then
+			Monster = "Dark Dragon User Lv.40"
+			Place = CFrame.new(659.884521, 128.174973, 1272.03076, 0.999370754, 6.58269661e-09, 0.0354691856, -5.66167735e-09, 1, -2.60671857e-08, -0.0354691856, 2.58499675e-08, 0.999370754)
+		elseif _G.Level == 45 or _G.Level <= 49 then
+			Monster = "Gazelle User Lv.45"
+			Place = CFrame.new(-2467.4458, 5.17605019, 1773.05347, -0.4912889, -3.93313329e-08, 0.870996654, 4.3920295e-08, 1, 6.99301026e-08, -0.870996654, 7.26103195e-08, -0.4912889)
+		elseif _G.Level == 50 or _G.Level <= 54 then
+			Monster = "Violent Dragoon Lv.50"
+			Place = CFrame.new(-526.0802, 5.30551243, 694.525391, -0.59568882, -9.48487724e-08, -0.803215325, -8.0949512e-08, 1, -5.80517572e-08, 0.803215325, 3.04391037e-08, -0.59568882)
+		elseif _G.Level == 55 or _G.Level <= 59 then
+			Monster = "Shark Overloaded Lv.55"
+			Place = CFrame.new(-1123.15198, 4.39665318, -22.8067303, 0.0155256558, 4.03844691e-09, 0.999879479, 2.12790474e-09, 1, -4.07197476e-09, -0.999879479, 2.19086815e-09, 0.0155256558)
+		elseif _G.Level == 60 or _G.Level <= 64 then
+			Monster = "Riot Combat  Lv.60"
+			Place = CFrame.new(-2899.16479, 24.1559486, 923.697449, 0.885684788, -3.04148458e-08, 0.464287043, -3.42193407e-09, 1, 7.20364781e-08, -0.464287043, -6.53903669e-08, 0.885684788)
+		elseif _G.Level == 65 or _G.Level <= 69 then
+			Monster = "Riot Maniac Lv.65"
+			Place = CFrame.new(-2934.29272, 24.1521263, 1180.7002, -0.898757398, 7.79565834e-09, -0.438446254, 2.47748844e-08, 1, -3.30050796e-08, 0.438446254, -4.05260145e-08, -0.898757398)
+		elseif _G.Level == 70 or _G.Level <= 74 then
+			Monster = "Riot Range  Lv.70"
+			Place = CFrame.new(-2768.13037, 24.3304863, 1115.76294, -0.887814999, -2.15751772e-08, -0.460200548, -4.22090736e-08, 1, 3.45472699e-08, 0.460200548, 5.00962223e-08, -0.887814999)
+		elseif _G.Level == 75 or _G.Level <= 80 then
+			Monster = "Riot Maniac Lv.75"
+			Place = CFrame.new(-3082.04102, 24.2805176, 462.74469, -0.943787396, -3.9998585e-10, -0.330553144, -4.41692072e-10, 1, 5.10584561e-11, 0.330553144, 1.94191024e-10, -0.943787396)
+		end
+	end
+end
+
+
+Tab_1:Label("// Auto Fram Settting //")
+
+
+local Dropdown_1 = Tab_1:Dropdown("Select Fram Mode", {"Above", "Behide", "Under (Safe)"}, function(Function)
+	_G.Select_Fram_Mode = Function
+end)
+
+
+Tab_1:Slider("Distance", 0, 15, 1, function(Function)
+	_G.Distance = Function
+end)
+
+
+Tab_1:Button("Set To Normal Distance", function()
+	_G.Distance = 9
+end)
+
+
+Tab_1:Toggle("Auto Skill E", false, function(Function)
+	_G.E = Function
+end)
+
+
+Tab_1:Toggle("Auto Skill R", false, function(Function)
+	_G.R = Function
+end)
+
+
+Tab_1:Toggle("Auto Skill C", false, function(Function)
+	_G.C = Function
+end)
+
+
+Tab_1:Toggle("Auto Skill V", false, function(Function)
+	_G.V = Function
+end)
+
+
+Tab_1:Label("// Auto Fram //")
+
+
+local Dropdown_2 = Tab_1:Dropdown("Select Monster", {"Lost Rider Lv.1", "Armed Lost Rider Lv.5", "Dragon User Lv.7", "Goon Lv.8", "Goon Lv.10", "Crab User Lv.10", "Bat User Lv.12", "Armed Lost Rider Lv.15", "Bull User Lv.15", "Goon Lv.20", "Cobra User Lv.20", "Armed Lost Rider Lv.25", "Manta User Lv.25", "Goon Lv.30", "Swan User Lv. 30", "Zebra Monster Lv.35", "Chameleon User Lv.35", "Savage Goon Lv.40", "Dark Dragon User Lv.40", "Tiger User Lv.40", "Rhino User Lv.40", "Dragoon Lv.45", "Gazelle User Lv.45", "Shark Monster Lv.50", "Violent Dragoon Lv.50", "Shark Overloaded Lv.55", "Riot Combat  Lv.60", "Riot Maniac Lv.65", "Riot Range  Lv.70", "Riot Maniac Lv.75", "Stingray Lv.80", "Tusked Lv.80"}, function(Function)
+	_G.Monster_Select = Function
+end)
+
+
+Tab_1:Button("Teleport To Monster", function()
+	if _G.Monster_Select == "Lost Rider Lv.1" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(25.4379921, 4.24629021, -223.349945, -0.991461277, -1.02967633e-07, 0.130401269, -9.80193064e-08, 1, 4.43652439e-08, -0.130401269, 3.12045785e-08, -0.991461277)
+	elseif _G.Monster_Select == "Armed Lost Rider Lv.5" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(42.8533554, 4.08676291, 210.836868, -0.999843359, 4.0877385e-08, -0.0176983736, 4.10856877e-08, 1, -1.14058265e-08, 0.0176983736, -1.21311894e-08, -0.999843359)
+	elseif _G.Monster_Select == "Dragon User Lv.7" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8.80333328, 3.5454154, 5.21081591, -0.9985466, 1.102947e-07, 0.0538947545, 1.09137822e-07, 1, -2.44086653e-08, -0.0538947545, -1.84912352e-08, -0.9985466)
+	elseif _G.Monster_Select == "Goon Lv.8" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-324.018738, 29.53479, 478.734375, -0.657034874, -7.85755887e-08, 0.753860176, -8.36924556e-08, 1, 3.12879322e-08, -0.753860176, -4.25351452e-08, -0.657034874)
+	elseif _G.Monster_Select == "Goon Lv.10" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-197.814087, 4.50000286, 843.676208, -0.956968546, 4.35205543e-08, 0.290191621, 4.4046093e-08, 1, -4.72043205e-09, -0.290191621, 8.26450197e-09, -0.956968546)
+	elseif _G.Monster_Select == "Crab User Lv.10" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-79.8831787, 42.1177521, 528.151672, -0.878157914, 1.10816156e-08, 0.478370875, 1.37017837e-08, 1, 1.98739913e-09, -0.478370875, 8.29978486e-09, -0.878157914)
+	elseif _G.Monster_Select == "Bat User Lv.12" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-158.62265, 74.4638138, 314.592224, -0.0128409406, 9.66724745e-09, 0.999917567, -7.03259815e-08, 1, -1.05711706e-08, -0.999917567, -7.04559255e-08, -0.0128409406)
+	elseif _G.Monster_Select == "Armed Lost Rider Lv.15" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-387.832153, 3.60900497, 1449.08801, 0.970612407, 2.68596203e-08, 0.240648106, -4.46470949e-08, 1, 6.84626471e-08, -0.240648106, -7.71949331e-08, 0.970612407)
+	elseif _G.Monster_Select == "Bull User Lv.15" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-404.994781, 8.92177963, 1659.50854, -0.99531728, 8.75039152e-09, 0.0966615677, 1.35708893e-08, 1, 4.92124137e-08, -0.0966615677, 5.02937532e-08, -0.99531728)
+	elseif _G.Monster_Select == "Goon Lv.20" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(217.957214, 34.9529495, 2098.29321, -0.148720294, 3.50245379e-08, -0.988879323, 1.48238328e-08, 1, 3.31890178e-08, 0.988879323, -9.72310144e-09, -0.148720294)
+	elseif _G.Monster_Select == "Cobra User Lv.20" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-468.873901, 22.9474945, 1898.77527, -0.999988139, -6.6245903e-08, 0.00487201428, -6.65105304e-08, 1, -5.41542846e-08, -0.00487201428, -5.4477681e-08, -0.999988139)
+	elseif _G.Monster_Select == "Armed Lost Rider Lv.25" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1175.89734, 29.3244286, 2162.86987, 0.0599565059, -3.13513091e-08, -0.998201013, 2.44393483e-08, 1, -2.99398728e-08, 0.998201013, -2.26002914e-08, 0.0599565059)
+	elseif _G.Monster_Select == "Manta User Lv.25" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(397.903625, 3.97849035, 2064.5835, -0.173645392, -1.00404328e-07, -0.984808266, 1.54132298e-08, 1, -1.04670896e-07, 0.984808266, -3.3354695e-08, -0.173645392)
+	elseif _G.Monster_Select == "Goon Lv.30" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1204.19556, 94.1177063, 2307.37256, 0.0635330901, -8.4450491e-09, -0.99797976, -2.61468358e-09, 1, -8.62860006e-09, 0.99797976, 3.15760285e-09, 0.0635330901)
+	elseif _G.Monster_Select == "Swan User Lv. 30" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(451.737915, 3.97773838, 1831.7583, 0.247243702, -4.83827343e-08, 0.968953311, 4.1647148e-08, 1, 3.93060624e-08, -0.968953311, 3.06359631e-08, 0.247243702)
+	elseif _G.Monster_Select == "Zebra Monster Lv.35" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1121.40417, 4.71889782, 1989.2262, -0.178891942, 2.34159092e-08, 0.983868718, 5.65977887e-09, 1, -2.27707417e-08, -0.983868718, 1.49497748e-09, -0.178891942)
+	elseif _G.Monster_Select == "Chameleon User Lv.35" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(623.148499, 129.234741, 1744.1095, 0.99999994, 2.80172241e-09, 0.000375740492, -2.80056711e-09, 1, -3.07553627e-09, -0.000375740492, 3.07448378e-09, 0.99999994)
+	elseif _G.Monster_Select == "Savage Goon Lv.40" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2366.23975, 43.5940933, 1659.96716, 0.298411638, -4.65492747e-08, -0.954437256, 1.13553744e-08, 1, -4.52210962e-08, 0.954437256, 2.65650857e-09, 0.298411638)
+	elseif _G.Monster_Select == "Dark Dragon User Lv.40" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(651.375793, 128.174973, 1275.16467, 0.986031175, -8.45532782e-08, -0.166561022, 7.58692238e-08, 1, -5.85002269e-08, 0.166561022, 4.5046189e-08, 0.986031175)
+	elseif _G.Monster_Select == "Tiger User Lv.40" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1306.44446, 10.0570278, 2505.78491, -0.954291582, 2.6589182e-09, -0.29887718, -5.47971268e-09, 1, 2.63926534e-08, 0.29887718, 2.6824047e-08, -0.954291582)
+	elseif _G.Monster_Select == "Rhino User Lv.40" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1603.33459, 6.21349907, 2192.25708, -0.998224139, 9.9715848e-08, 0.0595696904, 9.8466451e-08, 1, -2.39091502e-08, -0.0595696904, -1.80010762e-08, -0.998224139)
+	elseif _G.Monster_Select == "Dragoon Lv.45" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-715.62323, 3.70666742, 333.219025, 0.28420645, 9.22548082e-08, 0.958763123, -2.26699104e-08, 1, -8.95026844e-08, -0.958763123, 3.70216591e-09, 0.28420645)
+	elseif _G.Monster_Select == "Gazelle User Lv.45" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2471.65942, 5.17605019, 1760.19275, -0.704032958, -9.71844685e-08, 0.710167348, -4.90798371e-08, 1, 8.81913991e-08, -0.710167348, 2.72347531e-08, -0.704032958)
+	elseif _G.Monster_Select == "Shark Monster Lv.50" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1173.3429, 4.58998775, -411.059235, -0.0638126656, 7.47902718e-08, 0.997961879, -1.60017635e-08, 1, -7.59662129e-08, -0.997961879, -2.08167563e-08, -0.0638126656)
+	elseif _G.Monster_Select == "Violent Dragoon Lv.50" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-505.397034, 5.79066753, 725.319214, -0.28447929, -7.74466073e-08, -0.958682179, -7.1138917e-09, 1, -7.86734731e-08, 0.958682179, -1.5561012e-08, -0.28447929)
+	elseif _G.Monster_Select == "Shark Overloaded Lv.55" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1146.06128, 5.15058422, -23.22789, 0.00251538213, -7.40352064e-08, 0.999996841, 3.16093818e-08, 1, 7.39559312e-08, -0.999996841, 3.14232516e-08, 0.00251538213)
+	elseif _G.Monster_Select == "Riot Combat  Lv.60" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2897.59546, 24.156044, 925.780945, 0.891644418, 9.81393811e-08, 0.452736408, -1.01024106e-07, 1, -1.78068387e-08, -0.452736408, -2.98599225e-08, 0.891644418)
+	elseif _G.Monster_Select == "Riot Maniac Lv.65" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2937.81934, 24.1519203, 1178.82361, -0.864563763, 2.80508541e-08, -0.502523124, 2.14138063e-09, 1, 5.21358992e-08, 0.502523124, 4.3998714e-08, -0.864563763)
+	elseif _G.Monster_Select == "Riot Range  Lv.70" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3183.14819, 24.1535873, 952.831238, -0.346742809, 1.65888494e-08, 0.937960267, 1.24583437e-08, 1, -1.30805207e-08, -0.937960267, 7.14985449e-09, -0.346742809)
+	elseif _G.Monster_Select == "Riot Maniac Lv.75" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3104.56348, 24.2806091, 503.053162, 0.412228167, 8.29441099e-11, -0.911080658, 6.66974245e-08, 1, 3.02689998e-08, 0.911080658, -7.32444647e-08, 0.412228167)
+	elseif _G.Monster_Select == "Stingray Lv.80" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3067.68042, 4.87835979, 701.97937, 0.465554386, 1.07553902e-07, -0.885019243, -3.09692609e-08, 1, 1.05236154e-07, 0.885019243, -2.15847642e-08, 0.465554386)
+	elseif _G.Monster_Select == "Tusked Lv.80" then
+		game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3405.34961, 25.1672821, 643.642151, -0.481632113, -1.25693704e-08, 0.876373529, -5.38332436e-08, 1, -1.52428701e-08, -0.876373529, -5.45194823e-08, -0.481632113)
+	end
+end)
+
+
+Tab_1:Button("Check Levels (Click This Everytime You Changed Rider)", function()
+	for i = 1, 80 do task.wait()
+		local Level_Text = game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.LevelDescription.Text
+		if string.match(Level_Text, "Current Level : "..i) ~= nil and _G.Auto_Fram == true then
+			_G.Level = tonumber(i)
+			wait(0.15)
+			Discord_Gui:Notification("Current Level", "Your Current Level Is "..i.."?", "Okay")
+		end
+	end
+end)
+
+
+Tab_1:Toggle("Auto Fram Select", false, function(Function)
+	if Function then
+		_G.Auto_Fram_Select = true
+		
+		
+		while _G.Auto_Fram_Select == true do task.wait()
+			pcall(function()
+				if game:GetService("Workspace").Lives:FindFirstChild(_G.Monster_Select) then
+					for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+						if v.Name == _G.Monster_Select and v.Humanoid.Health > 0 and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true and _G.Is_Near == false then
+							repeat task.wait()
+								if _G.Select_Fram_Mode == "Above" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance, 0) * CFrame.fromOrientation(300, 0, 0)
+								elseif _G.Select_Fram_Mode == "Behide" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, _G.Distance) * CFrame.fromOrientation(0, 0, 0)
+								elseif _G.Select_Fram_Mode == "Under (Safe)" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance - (_G.Distance * 2), 0) * CFrame.fromOrientation(900, 0, 0)
+								end
+								
+								if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+									game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+								else
+									game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+								end
+								
+								setfflag("HumanoidParallelRemoveNoPhysics", "False")
+								setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+								
+								
+								if _G.E == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.R == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.C == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.V == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+							until _G.Auto_Fram_Select ~= true or v.Humanoid.Health == 0 or _G.Is_Near == true
+						elseif v.Name == _G.Monster_Select and v.Humanoid.Health <= 0 and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true then
+							if _G.Monster_Select == "Lost Rider Lv.1" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(25.4379921, 4.24629021, -223.349945, -0.991461277, -1.02967633e-07, 0.130401269, -9.80193064e-08, 1, 4.43652439e-08, -0.130401269, 3.12045785e-08, -0.991461277) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Armed Lost Rider Lv.5" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(42.8533554, 4.08676291, 210.836868, -0.999843359, 4.0877385e-08, -0.0176983736, 4.10856877e-08, 1, -1.14058265e-08, 0.0176983736, -1.21311894e-08, -0.999843359) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Dragon User Lv.7" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8.80333328, 3.5454154, 5.21081591, -0.9985466, 1.102947e-07, 0.0538947545, 1.09137822e-07, 1, -2.44086653e-08, -0.0538947545, -1.84912352e-08, -0.9985466) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Goon Lv.8" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-324.018738, 29.53479, 478.734375, -0.657034874, -7.85755887e-08, 0.753860176, -8.36924556e-08, 1, 3.12879322e-08, -0.753860176, -4.25351452e-08, -0.657034874) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Goon Lv.10" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-197.814087, 4.50000286, 843.676208, -0.956968546, 4.35205543e-08, 0.290191621, 4.4046093e-08, 1, -4.72043205e-09, -0.290191621, 8.26450197e-09, -0.956968546) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Crab User Lv.10" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-79.8831787, 42.1177521, 528.151672, -0.878157914, 1.10816156e-08, 0.478370875, 1.37017837e-08, 1, 1.98739913e-09, -0.478370875, 8.29978486e-09, -0.878157914) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Bat User Lv.12" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-158.62265, 74.4638138, 314.592224, -0.0128409406, 9.66724745e-09, 0.999917567, -7.03259815e-08, 1, -1.05711706e-08, -0.999917567, -7.04559255e-08, -0.0128409406) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Armed Lost Rider Lv.15" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-387.832153, 3.60900497, 1449.08801, 0.970612407, 2.68596203e-08, 0.240648106, -4.46470949e-08, 1, 6.84626471e-08, -0.240648106, -7.71949331e-08, 0.970612407) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Bull User Lv.15" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-404.994781, 8.92177963, 1659.50854, -0.99531728, 8.75039152e-09, 0.0966615677, 1.35708893e-08, 1, 4.92124137e-08, -0.0966615677, 5.02937532e-08, -0.99531728) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Goon Lv.20" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(217.957214, 34.9529495, 2098.29321, -0.148720294, 3.50245379e-08, -0.988879323, 1.48238328e-08, 1, 3.31890178e-08, 0.988879323, -9.72310144e-09, -0.148720294) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Cobra User Lv.20" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-468.873901, 22.9474945, 1898.77527, -0.999988139, -6.6245903e-08, 0.00487201428, -6.65105304e-08, 1, -5.41542846e-08, -0.00487201428, -5.4477681e-08, -0.999988139) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Armed Lost Rider Lv.25" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1175.89734, 29.3244286, 2162.86987, 0.0599565059, -3.13513091e-08, -0.998201013, 2.44393483e-08, 1, -2.99398728e-08, 0.998201013, -2.26002914e-08, 0.0599565059) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Manta User Lv.25" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(397.903625, 3.97849035, 2064.5835, -0.173645392, -1.00404328e-07, -0.984808266, 1.54132298e-08, 1, -1.04670896e-07, 0.984808266, -3.3354695e-08, -0.173645392) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Goon Lv.30" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1204.19556, 94.1177063, 2307.37256, 0.0635330901, -8.4450491e-09, -0.99797976, -2.61468358e-09, 1, -8.62860006e-09, 0.99797976, 3.15760285e-09, 0.0635330901) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Swan User Lv. 30" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(451.737915, 3.97773838, 1831.7583, 0.247243702, -4.83827343e-08, 0.968953311, 4.1647148e-08, 1, 3.93060624e-08, -0.968953311, 3.06359631e-08, 0.247243702) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Zebra Monster Lv.35" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1121.40417, 4.71889782, 1989.2262, -0.178891942, 2.34159092e-08, 0.983868718, 5.65977887e-09, 1, -2.27707417e-08, -0.983868718, 1.49497748e-09, -0.178891942) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Chameleon User Lv.35" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(623.148499, 129.234741, 1744.1095, 0.99999994, 2.80172241e-09, 0.000375740492, -2.80056711e-09, 1, -3.07553627e-09, -0.000375740492, 3.07448378e-09, 0.99999994) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Savage Goon Lv.40" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2366.23975, 43.5940933, 1659.96716, 0.298411638, -4.65492747e-08, -0.954437256, 1.13553744e-08, 1, -4.52210962e-08, 0.954437256, 2.65650857e-09, 0.298411638) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Dark Dragon User Lv.40" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(651.375793, 128.174973, 1275.16467, 0.986031175, -8.45532782e-08, -0.166561022, 7.58692238e-08, 1, -5.85002269e-08, 0.166561022, 4.5046189e-08, 0.986031175) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Tiger User Lv.40" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1306.44446, 10.0570278, 2505.78491, -0.954291582, 2.6589182e-09, -0.29887718, -5.47971268e-09, 1, 2.63926534e-08, 0.29887718, 2.6824047e-08, -0.954291582) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Rhino User Lv.40" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1603.33459, 6.21349907, 2192.25708, -0.998224139, 9.9715848e-08, 0.0595696904, 9.8466451e-08, 1, -2.39091502e-08, -0.0595696904, -1.80010762e-08, -0.998224139) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Dragoon Lv.45" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-715.62323, 3.70666742, 333.219025, 0.28420645, 9.22548082e-08, 0.958763123, -2.26699104e-08, 1, -8.95026844e-08, -0.958763123, 3.70216591e-09, 0.28420645) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Gazelle User Lv.45" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2471.65942, 5.17605019, 1760.19275, -0.704032958, -9.71844685e-08, 0.710167348, -4.90798371e-08, 1, 8.81913991e-08, -0.710167348, 2.72347531e-08, -0.704032958) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Shark Monster Lv.50" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1173.3429, 4.58998775, -411.059235, -0.0638126656, 7.47902718e-08, 0.997961879, -1.60017635e-08, 1, -7.59662129e-08, -0.997961879, -2.08167563e-08, -0.0638126656) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Violent Dragoon Lv.50" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-505.397034, 5.79066753, 725.319214, -0.28447929, -7.74466073e-08, -0.958682179, -7.1138917e-09, 1, -7.86734731e-08, 0.958682179, -1.5561012e-08, -0.28447929) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Shark Overloaded Lv.55" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1146.06128, 5.15058422, -23.22789, 0.00251538213, -7.40352064e-08, 0.999996841, 3.16093818e-08, 1, 7.39559312e-08, -0.999996841, 3.14232516e-08, 0.00251538213) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Riot Combat  Lv.60" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2897.59546, 24.156044, 925.780945, 0.891644418, 9.81393811e-08, 0.452736408, -1.01024106e-07, 1, -1.78068387e-08, -0.452736408, -2.98599225e-08, 0.891644418) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Riot Maniac Lv.65" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2937.81934, 24.1519203, 1178.82361, -0.864563763, 2.80508541e-08, -0.502523124, 2.14138063e-09, 1, 5.21358992e-08, 0.502523124, 4.3998714e-08, -0.864563763) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Riot Range  Lv.70" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3183.14819, 24.1535873, 952.831238, -0.346742809, 1.65888494e-08, 0.937960267, 1.24583437e-08, 1, -1.30805207e-08, -0.937960267, 7.14985449e-09, -0.346742809) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Riot Maniac Lv.75" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3104.56348, 24.2806091, 503.053162, 0.412228167, 8.29441099e-11, -0.911080658, 6.66974245e-08, 1, 3.02689998e-08, 0.911080658, -7.32444647e-08, 0.412228167) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Stingray Lv.80" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3067.68042, 4.87835979, 701.97937, 0.465554386, 1.07553902e-07, -0.885019243, -3.09692609e-08, 1, 1.05236154e-07, 0.885019243, -2.15847642e-08, 0.465554386) * CFrame.new(0, -15, 0)
+							elseif _G.Monster_Select == "Tusked Lv.80" then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3405.34961, 25.1672821, 643.642151, -0.481632113, -1.25693704e-08, 0.876373529, -5.38332436e-08, 1, -1.52428701e-08, -0.876373529, -5.45194823e-08, -0.481632113) * CFrame.new(0, -15, 0)
+							end
+						
+							setfflag("HumanoidParallelRemoveNoPhysics", "False")
+							setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+							game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+						end
+					end
+				elseif not game:GetService("Workspace").Lives:FindFirstChild(_G.Monster_Select) then
+					if _G.Monster_Select == "Lost Rider Lv.1" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(25.4379921, 4.24629021, -223.349945, -0.991461277, -1.02967633e-07, 0.130401269, -9.80193064e-08, 1, 4.43652439e-08, -0.130401269, 3.12045785e-08, -0.991461277)
+					elseif _G.Monster_Select == "Armed Lost Rider Lv.5" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(42.8533554, 4.08676291, 210.836868, -0.999843359, 4.0877385e-08, -0.0176983736, 4.10856877e-08, 1, -1.14058265e-08, 0.0176983736, -1.21311894e-08, -0.999843359)
+					elseif _G.Monster_Select == "Dragon User Lv.7" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8.80333328, 3.5454154, 5.21081591, -0.9985466, 1.102947e-07, 0.0538947545, 1.09137822e-07, 1, -2.44086653e-08, -0.0538947545, -1.84912352e-08, -0.9985466)
+					elseif _G.Monster_Select == "Goon Lv.8" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-324.018738, 29.53479, 478.734375, -0.657034874, -7.85755887e-08, 0.753860176, -8.36924556e-08, 1, 3.12879322e-08, -0.753860176, -4.25351452e-08, -0.657034874)
+					elseif _G.Monster_Select == "Goon Lv.10" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-197.814087, 4.50000286, 843.676208, -0.956968546, 4.35205543e-08, 0.290191621, 4.4046093e-08, 1, -4.72043205e-09, -0.290191621, 8.26450197e-09, -0.956968546)
+					elseif _G.Monster_Select == "Crab User Lv.10" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-79.8831787, 42.1177521, 528.151672, -0.878157914, 1.10816156e-08, 0.478370875, 1.37017837e-08, 1, 1.98739913e-09, -0.478370875, 8.29978486e-09, -0.878157914)
+					elseif _G.Monster_Select == "Bat User Lv.12" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-158.62265, 74.4638138, 314.592224, -0.0128409406, 9.66724745e-09, 0.999917567, -7.03259815e-08, 1, -1.05711706e-08, -0.999917567, -7.04559255e-08, -0.0128409406)
+					elseif _G.Monster_Select == "Armed Lost Rider Lv.15" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-387.832153, 3.60900497, 1449.08801, 0.970612407, 2.68596203e-08, 0.240648106, -4.46470949e-08, 1, 6.84626471e-08, -0.240648106, -7.71949331e-08, 0.970612407)
+					elseif _G.Monster_Select == "Bull User Lv.15" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-404.994781, 8.92177963, 1659.50854, -0.99531728, 8.75039152e-09, 0.0966615677, 1.35708893e-08, 1, 4.92124137e-08, -0.0966615677, 5.02937532e-08, -0.99531728)
+					elseif _G.Monster_Select == "Goon Lv.20" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(217.957214, 34.9529495, 2098.29321, -0.148720294, 3.50245379e-08, -0.988879323, 1.48238328e-08, 1, 3.31890178e-08, 0.988879323, -9.72310144e-09, -0.148720294)
+					elseif _G.Monster_Select == "Cobra User Lv.20" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-468.873901, 22.9474945, 1898.77527, -0.999988139, -6.6245903e-08, 0.00487201428, -6.65105304e-08, 1, -5.41542846e-08, -0.00487201428, -5.4477681e-08, -0.999988139)
+					elseif _G.Monster_Select == "Armed Lost Rider Lv.25" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1175.89734, 29.3244286, 2162.86987, 0.0599565059, -3.13513091e-08, -0.998201013, 2.44393483e-08, 1, -2.99398728e-08, 0.998201013, -2.26002914e-08, 0.0599565059)
+					elseif _G.Monster_Select == "Manta User Lv.25" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(397.903625, 3.97849035, 2064.5835, -0.173645392, -1.00404328e-07, -0.984808266, 1.54132298e-08, 1, -1.04670896e-07, 0.984808266, -3.3354695e-08, -0.173645392)
+					elseif _G.Monster_Select == "Goon Lv.30" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1204.19556, 94.1177063, 2307.37256, 0.0635330901, -8.4450491e-09, -0.99797976, -2.61468358e-09, 1, -8.62860006e-09, 0.99797976, 3.15760285e-09, 0.0635330901)
+					elseif _G.Monster_Select == "Swan User Lv. 30" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(451.737915, 3.97773838, 1831.7583, 0.247243702, -4.83827343e-08, 0.968953311, 4.1647148e-08, 1, 3.93060624e-08, -0.968953311, 3.06359631e-08, 0.247243702)
+					elseif _G.Monster_Select == "Zebra Monster Lv.35" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1121.40417, 4.71889782, 1989.2262, -0.178891942, 2.34159092e-08, 0.983868718, 5.65977887e-09, 1, -2.27707417e-08, -0.983868718, 1.49497748e-09, -0.178891942)
+					elseif _G.Monster_Select == "Chameleon User Lv.35" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(623.148499, 129.234741, 1744.1095, 0.99999994, 2.80172241e-09, 0.000375740492, -2.80056711e-09, 1, -3.07553627e-09, -0.000375740492, 3.07448378e-09, 0.99999994)
+					elseif _G.Monster_Select == "Savage Goon Lv.40" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2366.23975, 43.5940933, 1659.96716, 0.298411638, -4.65492747e-08, -0.954437256, 1.13553744e-08, 1, -4.52210962e-08, 0.954437256, 2.65650857e-09, 0.298411638)
+					elseif _G.Monster_Select == "Dark Dragon User Lv.40" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(651.375793, 128.174973, 1275.16467, 0.986031175, -8.45532782e-08, -0.166561022, 7.58692238e-08, 1, -5.85002269e-08, 0.166561022, 4.5046189e-08, 0.986031175)
+					elseif _G.Monster_Select == "Tiger User Lv.40" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1306.44446, 10.0570278, 2505.78491, -0.954291582, 2.6589182e-09, -0.29887718, -5.47971268e-09, 1, 2.63926534e-08, 0.29887718, 2.6824047e-08, -0.954291582)
+					elseif _G.Monster_Select == "Rhino User Lv.40" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1603.33459, 6.21349907, 2192.25708, -0.998224139, 9.9715848e-08, 0.0595696904, 9.8466451e-08, 1, -2.39091502e-08, -0.0595696904, -1.80010762e-08, -0.998224139)
+					elseif _G.Monster_Select == "Dragoon Lv.45" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-715.62323, 3.70666742, 333.219025, 0.28420645, 9.22548082e-08, 0.958763123, -2.26699104e-08, 1, -8.95026844e-08, -0.958763123, 3.70216591e-09, 0.28420645)
+					elseif _G.Monster_Select == "Gazelle User Lv.45" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2471.65942, 5.17605019, 1760.19275, -0.704032958, -9.71844685e-08, 0.710167348, -4.90798371e-08, 1, 8.81913991e-08, -0.710167348, 2.72347531e-08, -0.704032958)
+					elseif _G.Monster_Select == "Shark Monster Lv.50" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1173.3429, 4.58998775, -411.059235, -0.0638126656, 7.47902718e-08, 0.997961879, -1.60017635e-08, 1, -7.59662129e-08, -0.997961879, -2.08167563e-08, -0.0638126656)
+					elseif _G.Monster_Select == "Violent Dragoon Lv.50" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-505.397034, 5.79066753, 725.319214, -0.28447929, -7.74466073e-08, -0.958682179, -7.1138917e-09, 1, -7.86734731e-08, 0.958682179, -1.5561012e-08, -0.28447929)
+					elseif _G.Monster_Select == "Shark Overloaded Lv.55" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1146.06128, 5.15058422, -23.22789, 0.00251538213, -7.40352064e-08, 0.999996841, 3.16093818e-08, 1, 7.39559312e-08, -0.999996841, 3.14232516e-08, 0.00251538213)
+					elseif _G.Monster_Select == "Riot Combat  Lv.60" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2897.59546, 24.156044, 925.780945, 0.891644418, 9.81393811e-08, 0.452736408, -1.01024106e-07, 1, -1.78068387e-08, -0.452736408, -2.98599225e-08, 0.891644418)
+					elseif _G.Monster_Select == "Riot Maniac Lv.65" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2937.81934, 24.1519203, 1178.82361, -0.864563763, 2.80508541e-08, -0.502523124, 2.14138063e-09, 1, 5.21358992e-08, 0.502523124, 4.3998714e-08, -0.864563763)
+					elseif _G.Monster_Select == "Riot Range  Lv.70" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3183.14819, 24.1535873, 952.831238, -0.346742809, 1.65888494e-08, 0.937960267, 1.24583437e-08, 1, -1.30805207e-08, -0.937960267, 7.14985449e-09, -0.346742809)
+					elseif _G.Monster_Select == "Riot Maniac Lv.75" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3104.56348, 24.2806091, 503.053162, 0.412228167, 8.29441099e-11, -0.911080658, 6.66974245e-08, 1, 3.02689998e-08, 0.911080658, -7.32444647e-08, 0.412228167)
+					elseif _G.Monster_Select == "Stingray Lv.80" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3067.68042, 4.87835979, 701.97937, 0.465554386, 1.07553902e-07, -0.885019243, -3.09692609e-08, 1, 1.05236154e-07, 0.885019243, -2.15847642e-08, 0.465554386)
+					elseif _G.Monster_Select == "Tusked Lv.80" then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-3405.34961, 25.1672821, 643.642151, -0.481632113, -1.25693704e-08, 0.876373529, -5.38332436e-08, 1, -1.52428701e-08, -0.876373529, -5.45194823e-08, -0.481632113)
+					end
+				end
+			end)
+		end
+	else
+		_G.Auto_Fram_Select = false
+	end
+end)
+
+
+Tab_1:Toggle("Auto Fram Level", false, function(Function)
+	if Function then
+		_G.Auto_Fram = true
+		
+		while _G.Auto_Fram == true do task.wait()
+			pcall(function()
+				Check_Levels()
+				if game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true and _G.Is_Near == false then
+					if game:GetService("Workspace").Lives:FindFirstChild(Monster) then
+						for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+							if v.Name == Monster and v.Humanoid.Health > 0 then
+								repeat task.wait()
+									if _G.Select_Fram_Mode == "Above" then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance, 0) * CFrame.fromOrientation(300, 0, 0)
+									elseif _G.Select_Fram_Mode == "Behide" then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, _G.Distance) * CFrame.fromOrientation(0, 0, 0)
+									elseif _G.Select_Fram_Mode == "Under (Safe)" then
+										game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance - (_G.Distance * 2), 0) * CFrame.fromOrientation(900, 0, 0)
+									end
+									
+									if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+										game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+									else
+										game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+									end
+									
+									setfflag("HumanoidParallelRemoveNoPhysics", "False")
+									setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+									game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+									
+									
+									if _G.E == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.R == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.C == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.V == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+								until _G.Auto_Fram ~= true or v.Humanoid.Health == 0 or v.Name ~= Monster
+							elseif v.Name == Monster and v.Humanoid.Health <= 0 then
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = Place * CFrame.new(0, -15, 0)
+							
+								setfflag("HumanoidParallelRemoveNoPhysics", "False")
+								setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+							end
+						end
+					else
+						game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Place
+					end
+				end
+			end)
+		end
+	else
+		_G.Auto_Fram = false
+	end
+end)
+
+
+Tab_1:Toggle("Kill Aura", false, function(Function)
+	if Function then
+		_G.Kill_Aura = true
+		
+		while _G.Kill_Aura == true do task.wait()
+			pcall(function()
+				if game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true then
+					for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+						if (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude <= 50 and v.Humanoid.Health > 0 and not game:GetService("Players"):FindFirstChild(v.Name) then
+							repeat task.wait()
+								if _G.Select_Fram_Mode == "Above" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance, 0) * CFrame.fromOrientation(300, 0, 0)
+								elseif _G.Select_Fram_Mode == "Behide" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 0, _G.Distance) * CFrame.fromOrientation(0, 0, 0)
+								elseif _G.Select_Fram_Mode == "Under (Safe)" then
+									game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, _G.Distance - (_G.Distance * 2), 0) * CFrame.fromOrientation(900, 0, 0)
+								end
+								
+								if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+									game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+								else
+									game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+								end
+								
+								setfflag("HumanoidParallelRemoveNoPhysics", "False")
+								setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+								
+								
+								if _G.E == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.R == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.C == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+								if _G.V == true then
+									game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+								end
+							until _G.Kill_Aura ~= true or v.Humanoid.Health == 0
+						end
+					end
+				end
+			end)
+		end
+	else
+		_G.Kill_Aura = false
+	end
+end)
+
+
+Tab_1:Toggle("Safe Mode", false, function(Function)
+	if Function then
+		_G.Position = true
+
+
+		while _G.Position == true do wait(0.5)
+			pcall(function()
+				for _, v in pairs(game:GetService("Players"):GetChildren()) do
+					if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+						if (v.Character.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 75 then
+							
+							_G.Is_Near = true
+							
+							local Old_Position = v.Character.HumanoidRootPart.Position
+							print(v.Name, (Old_Position - v.Character.HumanoidRootPart.Position).Magnitude)
+							repeat task.wait()
+								game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame * CFrame.new(0, 3000, 0)
+								setfflag("HumanoidParallelRemoveNoPhysics", "False")
+								setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+								game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+							until (Old_Position - v.Character.HumanoidRootPart.Position).Magnitude >= 20 or _G.Position ~= true
+						else
+							_G.Is_Near = false
+						end
+					end
+				end
+			end)
+		end
+	else
+		_G.Position = false
+	end
+end)
+
+
+Tab_2:Label("// Auto Dungeon Setting //")
+
+
+local Dropdown_3 = Tab_2:Dropdown("Undead Race", {"Human", "Stingray", "Tusked", "Beetle", "Steed"}, function(Function)
+	_G.Undead_Select_Fake = Function
+end)
+
+
+Tab_2:Button("Confirm Undead (Used At Trail Phase 1)", function()
+	_G.Undead_Select = _G.Undead_Select_Fake
+end)
+
+
+Tab_2:Button("Teleport To Dungeon (Odin)", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPC["Odin Dungeon"].CFrame
+end)
+
+
+Tab_2:Toggle("Auto Skill E", false, function(Function)
+	_G.E_D = Function
+end)
+
+
+Tab_2:Toggle("Auto Skill R", false, function(Function)
+	_G.R_D = Function
+end)
+
+
+Tab_2:Toggle("Auto Skill C", false, function(Function)
+	_G.C_D = Function
+end)
+
+
+Tab_2:Toggle("Auto Skill V", false, function(Function)
+	_G.V_D = Function
+end)
+
+
+Tab_2:Label("// Auto Dungeon (Odin) //")
+
+
+Tab_2:Toggle("Auto Dungeon Phase 1", false, function(Function)
+	if Function then
+		_G.Auto_Trial1 = true
+
+		while _G.Auto_Trial1 == true do wait(0.5)
+			pcall(function()
+				if game:GetService("Players").LocalPlayer:FindFirstChild("Dungeon") then
+					if game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0 then
+						for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+							if v.Humanoid.Health > 0 and v:FindFirstChild("Dungeon") and v.Humanoid.MaxHealth ~= 17000 and v.Humanoid.MaxHealth ~= 500 then
+								repeat task.wait()
+									game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.fromOrientation(300, 0, 0)
+									
+									setfflag("HumanoidParallelRemoveNoPhysics", "False")
+									setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+									game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+									
+									if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+										game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+									else
+										game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+									end
+									
+									if _G.E_D == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.R_D == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.C_D == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+									if _G.V_D == true then
+										game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+									end
+								until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
+							elseif v.Name == "Odin_Human" and v.Humanoid.Health > 0 and v.Humanoid.MaxHealth == 17000 and not game:GetService("Workspace").Lives:FindFirstChild("Bulk Goon Lv.1") then
+								if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true then
+									game:GetService("ReplicatedStorage").Remote.Function.Feedback:InvokeServer("Henshin")
+								elseif not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == false then
+									if game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.Enabled == false then
+										game:GetService("ReplicatedStorage").Remote.Event.Activities:FireServer("SubTransformed")
+									elseif game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.Enabled == true then
+										if not game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.ScrollingFrame:FindFirstChild("UIGridLayout") then
+											if not game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI:FindFirstChild(_G.Undead_Select) then
+												game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.ScrollingFrame[_G.Undead_Select].Size = UDim2.new(9000, 9000 ,9000, 9000)
+												game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.ScrollingFrame[_G.Undead_Select].Parent = game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI
+											elseif game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI:FindFirstChild(_G.Undead_Select) then
+												game:GetService("VirtualUser"):CaptureController()
+												game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+												game:GetService("VirtualUser"):Button1Up(Vector2.new(1280, 672))
+											end 
+										elseif game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.ScrollingFrame:FindFirstChild("UIGridLayout") then
+											game:GetService("Players").LocalPlayer.PlayerGui.TransformGUI.ScrollingFrame.UIGridLayout:Destroy()
+										end
+									end
+								elseif game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == false then
+									repeat task.wait()
+										game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.fromOrientation(300, 0, 0)
+											
+										setfflag("HumanoidParallelRemoveNoPhysics", "False")
+										setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+										game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+										
+										if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+											game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+										else
+											game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+										end
+										
+										if _G.E_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.R_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.C_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.V_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+									until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
+								end
+							elseif v.Name == "Bulk Goon Lv.1" and v.Humanoid.Health > 0 and v.Humanoid.MaxHealth == 500 then	
+								if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == false then
+									game:GetService("ReplicatedStorage").Remote.Event.Activities:FireServer("SubTransformed")
+								elseif not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == false then
+									game:GetService("ReplicatedStorage").Remote.Function.Feedback:InvokeServer("Henshin")
+								elseif not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SubGUI") and game:GetService("Players").LocalPlayer.PlayerGui.RidersGUI.Enabled == true then
+									repeat task.wait()
+										game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 7, 0) * CFrame.fromOrientation(300, 0, 0)
+											
+										setfflag("HumanoidParallelRemoveNoPhysics", "False")
+										setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+										game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+										
+										if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+											game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+										else
+											game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+										end
+										
+										if _G.E_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.R_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.C_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+										if _G.V_D == true then
+											game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+										end
+									until _G.Auto_Trial1 ~= true or v.Humanoid.Health == 0
+								end
+							end
+						end
+					end
+				end
+			end)
+		end	
+	else
+		_G.Auto_Trial1 = false
+	end
+end)
+
+
+
+Tab_2:Toggle("Auto Dungeon Phase 2 [Attack Aura / No Boss]", false, function(Function)
+	if Function then
+		_G.Auto_Trail2 = true
+		
+		while _G.Auto_Trail2 == true do task.wait()
+			pcall(function()
+				for _, v in pairs(game:GetService("Workspace").Lives:GetChildren()) do
+					if v.Humanoid.Health > 0 and v:FindFirstChild("Dungeon") and v.Humanoid.MaxHealth ~= 17000 then
+						game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 9, 0) * CFrame.fromOrientation(300, 0, 0)
+						
+						if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Attack") then
+							game:GetService("Players").LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack["Attack"])
+						else
+							game:GetService("ReplicatedStorage").Remote.Event.Action:FireServer({["Input"] = "Mouse1", ["LightAttack"] = true})
+						end
+						
+						
+						if _G.E_D == true then
+							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "E",["Skill"] = _G.E_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						end
+						if _G.R_D == true then
+							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "R",["Skill"] = _G.R_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						end
+						if _G.C_D == true then
+							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "C",["Skill"] = _G.C_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						end
+						if _G.V_D == true then
+							game:GetService("ReplicatedStorage").Remote.Event.Riders:FireServer({["Key"] = "V",["Skill"] = _G.V_D,["MouseData"] = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame})
+						end
+						
+										
+						setfflag("HumanoidParallelRemoveNoPhysics", "False")
+						setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
+						game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+ 					end
+				end
+			end)
+		end
+	else
+		_G.Auto_Trail2 = false
+	end
+end)
+
+
+Tab_2:Toggle("Auto Dungeon Phase 3 [Is Coming]", false, function(Function)
+	
+end)
+
+
+Tab_3:Label("// Players //")
+
+
+local Dropdown_4 = Tab_3:Dropdown("Player Select", Player_In_The_Game, function(Function)
+	_G.Player_Select_Is = Function
+end)
+
+
+Tab_3:Button("Refesh", function()
+	Dropdown_4:Clear()
+	for i = 1, #game:GetService("Players"):GetChildren() do task.wait()
+		Dropdown_4:Add(game:GetService("Players"):GetChildren()[i].Name)
+	end
+end)
+
+
+Tab_3:Button("Teleport Select", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[_G.Player_Select_Is].Character.HumanoidRootPart.CFrame
+end)
+
+
+Tab_3:Button("View", function()
+	game:GetService("Workspace").Camera.CameraSubject = game:GetService("Players")[_G.Player_Select_Is].Character.Humanoid
+end)
+
+
+Tab_3:Button("Unview", function()
+	game:GetService("Workspace").Camera.CameraSubject = game:GetService("Players").LocalPlayer.Character.Humanoid
+end)
+
+
+Tab_4:Label("// NPC Teleport //")
+
+
+local Dropdown_5 = Tab_4:Dropdown("NPC Teleport", NPC_Teleport_Tab, function(Function)
+	_G.Teleport_Select = Function
+end)
+
+
+Tab_4:Button("Teleport Select", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPC[_G.Teleport_Select].CFrame
+end)
+
+
+Tab_4:Label("// Teleport //")
+
+
+Tab_4:Button("Chaos Destruction", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(17.149704, 4.24628067, -187.611725, -0.999873877, 2.06830197e-08, 0.0158827491, 2.03122532e-08, 1, -2.35053204e-08, -0.0158827491, -2.31797408e-08, -0.999873877)
+end)
+
+
+Tab_4:Button("Swamp Area", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(18.6785889, 6.71245766, 1913.92004, 0.0184839498, 9.74236158e-09, -0.999829173, 1.88849967e-08, 1, 1.00931556e-08, 0.999829173, -1.90683327e-08, 0.0184839498)
+end)
+
+
+Tab_4:Button("Bloodthirsty Cave", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1177.64587, 29.3244324, 2162.28076, 0.0133611197, -8.98367674e-08, -0.999910712, -5.27628643e-08, 1, -9.05498254e-08, 0.999910712, 5.39680016e-08, 0.0133611197)
+end)
+
+
+Tab_4:Button("Abandoned Zoo", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1500.87415, 4.28945827, 2071.66748, -0.103258699, 3.3884497e-08, 0.994654536, -5.94138463e-08, 1, -4.02345677e-08, -0.994654536, -6.32508232e-08, -0.103258699)
+end)
+
+
+Tab_4:Button("Bubble Beach", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-713.686157, 3.70666742, 336.344543, 0.334196568, -6.54094556e-09, 0.942503393, 1.36935334e-08, 1, 2.08446305e-09, -0.942503393, 1.22095818e-08, 0.334196568)
+end)
+
+
+Tab_4:Button("1st Village", function()
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2774.16187, 22.597702, 958.878906, -0.456249684, -1.11016139e-08, 0.889851809, 7.64562529e-08, 1, 5.16768672e-08, -0.889851809, 9.16122858e-08, -0.456249684)
+end)
+
+
+Tab_5:Label("// Anti Afk //")
+
+
+Tab_5:Toggle("Anti Afk", false, function(Function)
+	if Function then
+		_G.Anti_Afk = true
+
+		while _G.Anti_Afk == true do wait(300) 
+			pcall(function()
+				game:GetService("VirtualUser"):CaptureController()
+				game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+			end)
+		end
+	else
+		_G.Anti_Afk = false
+	end
+end)
+
+
+Tab_5:Label("// Effect //")
+
+
+Tab_5:Toggle("Delete Effect", false, function(Function)
+	if Function then
+		game:GetService("Workspace").EFX:Destroy()
+	else
+		local Effect = Instance.new("Folder", game.Workspace)
+		Effect.Name = "EFX"
+	end
+end)
+
+
+Tab_5:Label("// Name //")
+
+
+Tab_5:Toggle("Cool Name", false, function(Function)
+	if Function then
+		_G.Auto_Hide_Name = true
+		while _G.Auto_Hide_Name == true do wait()
+			pcall(function()
+				local Text_Random1 = {"!", "@", "#", "&", "%", "?"}
+				local Random1 = math.random(1, #Text_Random1)
+				
+				local Text_Random2 = {"!", "@", "#", "&", "%", "?"}
+				local Random2 = math.random(1, #Text_Random2)
+				
+				local Text_Random3 = {"!", "@", "#", "&", "%", "?"}
+				local Random3 = math.random(1, #Text_Random3)
+				
+				local Text_Random4 = {"!", "@", "#", "&", "%", "?"}
+				local Random4 = math.random(1, #Text_Random4)
+				if _G.Auto_Hide_Name == true then
+					game:GetService("Players").LocalPlayer.Character.NAME_GUI.Box.Header.Text = "Fake X User".." Lv."..Text_Random1[Random1]..Text_Random2[Random2]..Text_Random3[Random3]..Text_Random4[Random4]
+				else
+					game:GetService("Players").LocalPlayer.Character.NAME_GUI.Box.Header.Text = "Fake X Hub User"
+				end
+			end)
+		end
+	else
+		_G.Auto_Hide_Name = false
+		game:GetService("Players").LocalPlayer.Character.NAME_GUI.Box.Header.Text = "Fake X Hub User"
+	end
+end)
+
+
+Tab_5:Label("// Character //")
+
+
+Tab_5:Button("Reset Character", function()
+	game:GetService("Players").LocalPlayer.Character.Humanoid.Health = 0
+end)
